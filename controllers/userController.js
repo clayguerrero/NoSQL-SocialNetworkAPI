@@ -74,10 +74,13 @@ module.exports = {
         return res
           .status(404)
           .json({ message: `No user found with that ID Number` });
-        }
-        res.json(user)
+      }
+      res.json(user);
     } catch (error) {
-        res.status(500).json({message: `Cannot add friend to User`})
+      res.status(500).json({ message: `Cannot add friend to User` });
     }
   },
+  //
+  //  ADD DELETE FRIEND
+  //
 };
