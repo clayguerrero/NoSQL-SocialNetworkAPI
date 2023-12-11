@@ -6,4 +6,5 @@ const {
     createUser,
     updateUser,
     deleteUser,
-} = require()
+} = require('../../controllers/userController')
+
