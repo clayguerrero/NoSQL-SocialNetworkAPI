@@ -24,6 +24,22 @@ module.exports = {
     }
   },
 
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body },
+        { new: true },
+      );
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: `No user found with that ID Number` });
+        }
+        res.json(user)
+    } catch (error) {}
+  },
+
   async createUser(req, res) {
     try {
       const user = await User.create(req.body);
