@@ -8,3 +8,8 @@ const {
     deleteUser,
 } = require('../../controllers/userController')
 
+router.route('/').get(getUsers)
+
+router.route('/:userId').get(getSingleUser)
+
+module.exports = router;
