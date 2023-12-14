@@ -13,7 +13,11 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       // add validation
-      // validate:
+      validate: function (e) {
+        return /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(
+          e
+        );
+      },
     },
     friends: [
       {
