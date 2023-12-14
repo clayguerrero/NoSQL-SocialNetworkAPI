@@ -32,4 +32,40 @@ module.exports = {
       res.status(500).json({ message: `Cannot create Thought` });
     }
   },
+
+  async updateThought(req, res) {
+    try {
+      const thought = await Thought.findByIdAndUpdate(
+        req.params.thoughtId,
+        req.body,
+        {
+          new: true,
+        }
+      );
+      if (!thought) {
+        return res
+          .status(404)
+          .json({ message: `No Thought found with that ID Number` });
+      }
+      res.json(thought);
+    } catch (error) {
+      res.status(500).json({ message: `Cannot update Thought by ID` });
+    }
+  },
+
+  async deleteThought(req, res) {
+    try {
+      const thought = await Thought.findOneAndDelete({
+        _id: req.params.thoughtId,
+      });
+      if (!thought) {
+        return res
+          .status(404)
+          .json({ message: `No Thought found with that ID Number` });
+      }
+      res.json({ message: `Thought has been deleted` });
+    } catch (error) {
+      res.status(500).json({ message: `Cannot delete Thought` });
+    }
+  },
 };

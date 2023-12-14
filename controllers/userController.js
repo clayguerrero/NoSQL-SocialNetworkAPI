@@ -1,7 +1,6 @@
 const { User } = require("../models");
 
 module.exports = {
-  
   async getUsers(req, res) {
     try {
       const users = await User.find();
@@ -38,7 +37,9 @@ module.exports = {
           .json({ message: `No user found with that ID Number` });
       }
       res.json(user);
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({ message: `Cannot update user by ID` });
+    }
   },
 
   async createUser(req, res) {
