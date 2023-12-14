@@ -68,4 +68,40 @@ module.exports = {
       res.status(500).json({ message: `Cannot delete Thought` });
     }
   },
+
+  async createReaction(req, res) {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $addToSet: { reactions: req.body } },
+        { runValidators: true, new: true }
+      );
+      if (!thought) {
+        return res
+          .status(404)
+          .json({ message: `No Thought with that ID Number` });
+      }
+      res.json(thought);
+    } catch (error) {
+      res.status(500).json({ message: `Cannot create Reaction` });
+    }
+  },
+
+  async deleteReaction(req, res) {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { runValidators: true, new: true }
+      );
+      if (!thought) {
+        return res
+          .status(404)
+          .json({ message: `No Thought with that Id Number` });
+      }
+      res.json(thought);
+    } catch (error) {
+      res.status(500).json({ message: `Cannot delete Reaction` });
+    }
+  },
 };

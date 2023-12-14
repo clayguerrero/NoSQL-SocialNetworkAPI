@@ -83,11 +83,11 @@ module.exports = {
     }
   },
 
-  async deleteFriend(req, res) {
+  async deleteFriend({params}, res) {
     try {
-      const user = await User.findByIdAndDelete(
-        { _id: req.params.userId },
-        { $pull: { friends: req.body.friendId || req.params.friendId } },
+      const user = await User.findOneAndUpdate(
+        { _id: params.userId },
+        { $pull: { friends: params.friendId } },
         { new: true }
       );
       if (!user) {
