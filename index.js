@@ -1,5 +1,5 @@
 const express = require('express')
-// const db = require() config/connection
+const db = require('./config/connection')
 const routes = require('./routes')
 
 const PORT = 3001
@@ -11,6 +11,6 @@ app.use(routes);
 
 db.once("open", () => {
   app.listen(PORT, () => {
-    console.log(`API server for ${activity} running on port ${PORT}!`);
+    console.log(`API server for NoSQL Social Network running on port ${PORT}!`);
   });
 });
