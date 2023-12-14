@@ -1,6 +1,9 @@
 const router = require("express").Router();
-const userRoutes = require("./api/userRoutes");
+const apiRoutes = require("./api");
 
-router.use("/users", userRoutes);
+router.use("/api", apiRoutes);
+router.use((res, req) => {
+  return res.statusCode(404).send(`No Route Found`);
+});
 
-modules.exports = router;
+module.exports = router;
